@@ -25,6 +25,7 @@ from rest_framework_simplejwt.views import (
 
 stahoo_router = DefaultRouter()
 stahoo_router.register(r'users', views.UserViewSet)
+stahoo_router.register(r'users/create', views.UserRegisterViewSet)
 stahoo_router.register(r'operations', views.OperationViewSet)
 stahoo_router.register(r'partials', views.PartialOperationViewSet)
 

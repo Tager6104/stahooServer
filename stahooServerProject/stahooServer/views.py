@@ -6,11 +6,17 @@ from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
+class UserRegisterViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.UserRegistrationSerializer
+    queryset = models.User.objects.all()
+    http_method_names = ['post']
+
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     serializer_class = serializers.UserGetSerializer
     queryset = models.User.objects.all()
-    http_method_names = ['get']
+    http_method_names = [m for m in super().http_method_names if m != 'post']
 
 
 class OperationViewSet(viewsets.ModelViewSet):

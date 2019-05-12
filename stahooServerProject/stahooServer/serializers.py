@@ -7,6 +7,13 @@ class UserGetSerializer(serializers.ModelSerializer):
         model = models.User
         fields = ('id', 'username',
                   'email', 'first_name', 'last_name', 'friends')
+
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ('id', 'username', 'password'
+                  'email', 'first_name', 'last_name')
         
     def create(self, *args, **kwargs):
         user = super().create(*args, **kwargs)
