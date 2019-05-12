@@ -2,12 +2,12 @@ import stahooServer.models as models
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'password',
+        fields = ('id', 'username',
                   'email', 'first_name', 'last_name', 'friends')
-
+        
     def create(self, *args, **kwargs):
         user = super().create(*args, **kwargs)
         p = user.password
