@@ -16,7 +16,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.UserGetSerializer
     queryset = models.User.objects.all()
-    http_method_names = [m for m in super().http_method_names if m != 'post']
+    http_method_names = http_method_names = ['get', 'put', 'patch', 'delete', 'head', 'options', 'trace']
 
 
 class OperationViewSet(viewsets.ModelViewSet):
