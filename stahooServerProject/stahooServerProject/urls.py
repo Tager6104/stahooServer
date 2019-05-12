@@ -17,6 +17,11 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from stahooServer import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
 
 stahoo_router = DefaultRouter()
 stahoo_router.register(r'users', views.UserViewSet)
@@ -25,5 +30,9 @@ stahoo_router.register(r'partials', views.PartialOperationViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api_stahoo/', include(stahoo_router.urls))
+    path('api_stahoo/', include(stahoo_router.urls)),
+    path('api_stahoo/token/', TokenObtainPairView.as_view(), name='token_obtain'),
+    path('api_stahoo/token/refresh',
+         TokenRefreshView.as_view(), name='token_refresh'),
+    path('api_stahoo/token/verify', TokenVerifyView.as_view(), name='token_verify'),
 ]
