@@ -37,6 +37,7 @@ class UserOperationViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         user_operations = self.queryset.filter(
+            from_user=get_object_or_404(models.User, pk=pk),
             to_user=get_object_or_404(models.User, pk=pk))
         serializer = self.serializer_class(user_operations, many=True)
         return Response(serializer.data)
