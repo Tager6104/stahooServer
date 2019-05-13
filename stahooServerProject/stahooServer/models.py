@@ -23,7 +23,6 @@ class Operation(models.Model):
     name = models.TextField()
     description = models.TextField()
     datetime = models.DateTimeField(auto_now_add=True)
-    operation_type = models.IntegerField()
     category = models.IntegerField()
     cycle = models.BooleanField(default=False)
     partials = models.ManyToManyField(PartialOperation)
