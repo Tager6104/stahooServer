@@ -55,8 +55,7 @@ class SendInvitationView(views.APIView):
     def post(self, request):
 
         email = request.data['email']
-        sender_id = request.user
-        sender = get_object_or_404(models.User, pk=sender_id)
+        sender = request.user
         receiver = get_object_or_404(models.User, email=email)
 
         receiver.pending.add(sender)
@@ -71,11 +70,10 @@ class AcceptInvitationView(views.APIView):
     def post(self, request):
 
         sender_id = request.data['sender_id']
-        receiver_id = request.user
+        receiver = request.user
         is_accepted = request.data['is_accepted']
 
         sender = get_object_or_404(models.User, pk=sender_id)
-        receiver = get_object_or_404(models.User, pk=receiver_id)
 
         receiver.pending.remove(sender)
 
