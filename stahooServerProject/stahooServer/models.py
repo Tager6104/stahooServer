@@ -3,12 +3,14 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+class FriendList(models.Model):
+    users = models.ManyToManyField('models.User')
+
 
 class User(AbstractUser):
     friends = models.ManyToManyField(
         "self", blank=True, related_name="friends")
-    pending = models.ManyToManyField(
-        "self", blank=True, related_name="pending")
+    pending = models.ForeignKey(FriendList, on_delete=models.PROTECT)
 
 
 class PartialOperation(models.Model):
