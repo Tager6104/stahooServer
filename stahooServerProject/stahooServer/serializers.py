@@ -35,4 +35,4 @@ class OperationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Operation
         fields = ('id', 'to_user', 'from_user', 'amount', 'name', 'description',
-                  'datetime', 'category', 'cycle', 'partials')
+                  'datetime', 'category', 'cycle_type', 'partials')
