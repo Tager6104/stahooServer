@@ -86,3 +86,10 @@ class AcceptInvitationView(views.APIView):
 
             return Response({"status": "accepted"})
         return Response({"status": "declined"})
+
+class GetCurrentUserView(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        return serializers.UserGetSerializer(user).data

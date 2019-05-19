@@ -45,4 +45,5 @@ urlpatterns = [
     path('api_stahoo/token/refresh',
          TokenRefreshView.as_view(), name='token_refresh'),
     path('api_stahoo/token/verify', TokenVerifyView.as_view(), name='token_verify'),
+    path('api_stahoo/token/get_user', views.GetCurrentUserView.as_view(), name='get_current_user')
 ]
