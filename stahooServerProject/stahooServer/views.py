@@ -85,7 +85,10 @@ class AcceptInvitationView(views.APIView):
             sender.save()
 
             return Response({"status": "accepted"})
+
+        receiver.save()
         return Response({"status": "declined"})
+
 
 class FriendRemovalView(views.APIView):
     permission_classes = (IsAuthenticated,)
@@ -102,13 +105,14 @@ class FriendRemovalView(views.APIView):
 
         return Response({"status": "success"})
 
+
 class GetCurrentUserView(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         user = request.user
         return Response(serializers.UserGetSerializer(user).data)
-        
+
 
 class GetUserWithSerializedFriendsView(views.APIView):
     permission_classes = (IsAuthenticated,)
