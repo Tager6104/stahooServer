@@ -108,3 +108,11 @@ class GetCurrentUserView(views.APIView):
     def get(self, request):
         user = request.user
         return Response(serializers.UserGetSerializer(user).data)
+        
+
+class GetUserWithSerializedFriendsView(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        return Response(serializers.UserSerializedFriendsSerializer(user).data)
