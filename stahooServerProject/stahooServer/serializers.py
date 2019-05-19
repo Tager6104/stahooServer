@@ -16,8 +16,15 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class UserSerializedFriendsSerializer(serializers.ModelSerializer):
-    friends = UserRegistrationSerializer(many=True, read_only=True)
-    pending = UserRegistrationSerializer(many=True, read_only=True)
+
+    class FriendSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = models.User
+            fields = ('id', 'username',
+                  'email', 'first_name', 'last_name')
+
+    friends = FriendSerializer(many=True, read_only=True)
+    pending = FriendSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.User
