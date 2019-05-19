@@ -8,7 +8,7 @@ class User(AbstractUser):
     friends = models.ManyToManyField(
         "self", blank=True, related_name="friends")
     pending = models.ManyToManyField(
-        "self", blank=True, related_name="pending")
+        "self", symmetrical=False, blank=True)
 
 
 class PartialOperation(models.Model):

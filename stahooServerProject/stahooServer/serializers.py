@@ -1,14 +1,6 @@
 import stahooServer.models as models
 from rest_framework import serializers
 
-
-class UserGetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.User
-        fields = ('id', 'username',
-                  'email', 'first_name', 'last_name', 'friends', 'pending')
-
-
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
@@ -21,6 +13,31 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.set_password(p)
         user.save()
         return user
+
+
+class UserSerializedFriendsSerializer(serializers.ModelSerializer):
+
+    class FriendSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = models.User
+            fields = ('id', 'username',
+                  'email', 'first_name', 'last_name')
+
+    friends = FriendSerializer(many=True, read_only=True)
+    pending = FriendSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.User
+        fields = ('id', 'username',
+                  'email', 'first_name', 'last_name', 'friends', 'pending')
+
+
+class UserGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ('id', 'username',
+                  'email', 'first_name', 'last_name', 'friends', 'pending')
+
 
 
 class PartialOperationSerializer(serializers.ModelSerializer):
