@@ -92,4 +92,4 @@ class GetCurrentUserView(views.APIView):
 
     def get(self, request):
         user = request.user
-        return serializers.UserGetSerializer(user).data
+        return Response(serializers.UserGetSerializer(user).data)
