@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     class FriendList(models.Model):
-        users = models.ManyToManyField(User)
+        users = models.ManyToManyField("User")
 
     friends = models.ManyToManyField(
         "self", blank=True, related_name="friends")
