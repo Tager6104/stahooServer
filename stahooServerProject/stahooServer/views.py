@@ -55,7 +55,7 @@ class SendInvitationView(views.APIView):
     def post(self, request):
 
         email = request.data['email']
-        sender_id = request.data['sender_id']
+        sender_id = request.user
         sender = get_object_or_404(models.User, pk=sender_id)
         receiver = get_object_or_404(models.User, email=email)
 
@@ -63,3 +63,28 @@ class SendInvitationView(views.APIView):
         receiver.save()
 
         return Response({"status": "success"})
+
+
+class AcceptInvitationView(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+
+        sender_id = request.data['sender_id']
+        receiver_id = request.user
+        is_accepted = request.data['is_accepted']
+
+        sender = get_object_or_404(models.User, pk=sender_id)
+        receiver = get_object_or_404(models.User, pk=receiver_id)
+
+        receiver.pending.remove(sender)
+
+        if is_accepted:
+            receiver.friends.add(sender)
+            sender.friends.add(receiver)
+
+            receiver.save()
+            sender.save()
+
+            return Response({"status": "accepted"})
+        return Response({"status": "declined"})

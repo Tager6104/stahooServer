@@ -33,8 +33,14 @@ stahoo_router.register(r'partials', views.PartialOperationViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api_stahoo/', include(stahoo_router.urls)),
+
+    # ZAPROSZENIA
     path('api_stahoo/send_invitation/',
          views.SendInvitationView.as_view(), name='send_invitation'),
+    path('api_stahoo/accept_invitation/',
+         views.AcceptInvitationView.as_view(), name='accept_invitation'),
+
+    # TOKENY
     path('api_stahoo/token/', TokenObtainPairView.as_view(), name='token_obtain'),
     path('api_stahoo/token/refresh',
          TokenRefreshView.as_view(), name='token_refresh'),
