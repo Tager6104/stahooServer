@@ -58,3 +58,5 @@ docs/_build/
 target/
 
 \.vscode/
+
+stahooServerProject/db\.sqlite3
