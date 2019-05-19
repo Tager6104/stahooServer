@@ -9,7 +9,7 @@ class User(AbstractUser):
 
     friends = models.ManyToManyField(
         "self", blank=True, related_name="friends")
-    pending = models.ForeignKey(FriendList, on_delete=models.PROTECT)
+    pending = models.ForeignKey(FriendList, on_delete=models.PROTECT, default=FriendList())
 
 
 class PartialOperation(models.Model):
