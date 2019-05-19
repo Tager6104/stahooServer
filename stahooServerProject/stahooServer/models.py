@@ -3,11 +3,10 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class FriendList(models.Model):
-    users = models.ManyToManyField(User)
-
-
 class User(AbstractUser):
+    class FriendList(models.Model):
+        users = models.ManyToManyField(User)
+
     friends = models.ManyToManyField(
         "self", blank=True, related_name="friends")
     pending = models.ForeignKey(FriendList, on_delete=models.PROTECT)
