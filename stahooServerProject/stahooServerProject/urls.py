@@ -39,6 +39,7 @@ urlpatterns = [
          views.SendInvitationView.as_view(), name='send_invitation'),
     path('api_stahoo/accept_invitation/',
          views.AcceptInvitationView.as_view(), name='accept_invitation'),
+    path('api_stahoo/remove_friend/', views.FriendRemovalView.as_view(), name='remove_friend'),
 
     # TOKENY
     path('api_stahoo/token/', TokenObtainPairView.as_view(), name='token_obtain'),
