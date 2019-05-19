@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class FriendList(models.Model):
-    users = models.ManyToManyField('models.User')
+    users = models.ManyToManyField(User)
 
 
 class User(AbstractUser):
