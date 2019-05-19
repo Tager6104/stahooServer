@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, views
 import stahooServer.models as models
 import stahooServer.serializers as serializers
 from rest_framework.permissions import IsAuthenticated
@@ -47,3 +47,19 @@ class PartialOperationViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.PartialOperationSerializer
     queryset = models.PartialOperation.objects.all()
+
+
+class SendInvitationView(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+
+        email = request.data['email']
+        sender_id = request.data['sender_id']
+        sender = get_object_or_404(models.User, pk=sender_id)
+        receiver = get_object_or_404(models.User, email=email)
+
+        receiver.pending.add(sender)
+        receiver.save()
+
+        return Response({"status": "success"})

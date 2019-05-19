@@ -5,7 +5,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    friends = models.ManyToManyField("self", blank=True)
+    friends = models.ManyToManyField(
+        "self", blank=True, related_name="friends")
+    pending = models.ManyToManyField(
+        "self", blank=True, related_name="pending")
 
 
 class PartialOperation(models.Model):
@@ -24,5 +27,5 @@ class Operation(models.Model):
     description = models.TextField()
     datetime = models.DateTimeField(auto_now_add=True)
     category = models.IntegerField()
-    cycle = models.BooleanField(default=False)
+    cycle_type = models.IntegerField(default=0)
     partials = models.ManyToManyField(PartialOperation)
