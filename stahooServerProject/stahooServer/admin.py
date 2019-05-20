@@ -1,5 +1,5 @@
 from django.contrib import admin
-import models
+import stahooServer.models as models
 
 # Register your models here.
 
