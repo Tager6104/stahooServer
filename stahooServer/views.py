@@ -1,12 +1,9 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 import stahooServer.models as models
 import stahooServer.serializers as serializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-
-# Create your views here.
 
 
 class UserRegisterViewSet(viewsets.ModelViewSet):
@@ -19,7 +16,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.UserGetSerializer
     queryset = models.User.objects.all()
-    http_method_names = http_method_names = [
+    http_method_names = [
         'get', 'put', 'patch', 'delete', 'head', 'options', 'trace']
 
 

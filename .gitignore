@@ -8,7 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
+.env/
 build/
 develop-eggs/
 dist/
@@ -58,3 +58,6 @@ docs/_build/
 target/
 
 \.vscode/
+.idea/
+*.sqlite3
+stahooServerProject/.idea/
