@@ -12,5 +12,10 @@ stahoo_router.register(r'partials', views.PartialOperationViewSet)
 
 
 urlpatterns = [
-    path('api_stahoo/', include(stahoo_router.urls)),
+    path('api/stahoo/', include(stahoo_router.urls)),
+    path('api/stahoo/send_invitation/',
+         views.SendInvitationView.as_view(), name='send_invitation'),
+    path('api/stahoo/accept_invitation/',
+         views.AcceptInvitationView.as_view(), name='accept_invitation'),
+    path('api/stahoo/remove_friend/', views.FriendRemovalView.as_view(), name='remove_friend'),
 ]

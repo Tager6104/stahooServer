@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'stahooServer.apps.StahooserverConfig',
     'corsheaders',
     'rest_framework',
+    'drf_yasg',
 
     'django.contrib.admin',
     'django.contrib.auth',
