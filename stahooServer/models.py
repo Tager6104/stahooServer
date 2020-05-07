@@ -6,9 +6,13 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     friends = models.ManyToManyField(
-        "self", blank=True, related_name="friends")
+        'self', blank=True, related_name='friends')
     pending = models.ManyToManyField(
-        "self", symmetrical=False, blank=True)
+        'self', symmetrical=False, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.set_password(self.password)
+        super().save(*args, **kwargs)
 
 
 class PartialOperation(models.Model):

@@ -1,4 +1,4 @@
-from rest_framework import viewsets, views
+from rest_framework import viewsets, views, mixins, generics
 import stahooServer.models as models
 import stahooServer.serializers as serializers
 from rest_framework.permissions import IsAuthenticated
@@ -6,10 +6,12 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 
-class UserRegisterViewSet(viewsets.ModelViewSet):
+class UserRegisterView(mixins.CreateModelMixin,
+                       generics.GenericAPIView):
     serializer_class = serializers.UserRegistrationSerializer
-    queryset = models.User.objects.all()
-    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -58,7 +60,7 @@ class SendInvitationView(views.APIView):
         receiver.pending.add(sender)
         receiver.save()
 
-        return Response({"status": "success"})
+        return Response({'status': 'success'})
 
 
 class AcceptInvitationView(views.APIView):
@@ -81,10 +83,10 @@ class AcceptInvitationView(views.APIView):
             receiver.save()
             sender.save()
 
-            return Response({"status": "accepted"})
+            return Response({'status': 'accepted'})
 
         receiver.save()
-        return Response({"status": "declined"})
+        return Response({'status': 'declined'})
 
 
 class FriendRemovalView(views.APIView):
@@ -100,7 +102,7 @@ class FriendRemovalView(views.APIView):
         user.save()
         friend.save()
 
-        return Response({"status": "success"})
+        return Response({'status': 'success'})
 
 
 class GetCurrentUserView(views.APIView):
